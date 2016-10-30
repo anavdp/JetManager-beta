@@ -75,6 +75,8 @@ public class CDiaFeriado implements ActionListener, KeyListener{
     public void Limpiar(){
         diaF.getTxtDescripcion().setText("");
         diaF.getCalendario().setDate(null);
+        diaF.getBtnRestablecer().setEnabled(false);
+        diaF.getBtnModificar().setEnabled(false);
     }
     
     public ArrayList ObtenerDias(MDiaFeriado dia) 
@@ -175,7 +177,7 @@ public class CDiaFeriado implements ActionListener, KeyListener{
                         
                         diaF.getTxtDescripcion().setText(dia.getDescripcion());
                         diaF.getBtnModificar().setEnabled(true);
-                        diaF.getBtnRestablecer().setEnabled(true);
+                        diaF.getBtnRestablecer().setEnabled(false);
                     }
                     else
                     {
@@ -323,6 +325,7 @@ public class CDiaFeriado implements ActionListener, KeyListener{
             diaF.getTxtDescripcion().setText("");
             diaF.getCalendario().setDate(null);
             diaF.getBtnModificar().setEnabled(false);
+            diaF.getBtnRestablecer().setEnabled(true);
         }
     }
     
@@ -334,7 +337,7 @@ public class CDiaFeriado implements ActionListener, KeyListener{
             {
                 m = c.GetMemento(c.getEstados().size() - 1);
 
-                diaF.getTxtDescripcion().setText(m.getEstado());
+                //diaF.getTxtDescripcion().setText(m.getEstado());
                 
                 dia.setDescripcion(m.getEstado());
                 

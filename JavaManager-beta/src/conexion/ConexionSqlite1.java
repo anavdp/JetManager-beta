@@ -92,7 +92,7 @@ public class ConexionSqlite1 implements Serializable
         {
             Class.forName("org.sqlite.JDBC");
             //Class.forName(driver);
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ABUNASSAR PENARANDA\\Desktop\\Semestre VI\\Laboratorio I\\Proyecto\\JetManager_backup.db" );
+            connection = DriverManager.getConnection("jdbc:sqlite:D:\\Users\\Vicky\\Documents\\NetBeansProjects\\subJet\\JavaManager-beta\\src\\BD\\JetManager_backup.db" );
                // connection = DriverManager.getConnection(String.valueOf(url) + nombreBd, usuario, password);
         }
         catch (Exception e){
