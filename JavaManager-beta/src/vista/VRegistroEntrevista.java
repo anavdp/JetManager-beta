@@ -9,9 +9,12 @@
 package vista;
 
 import com.toedter.calendar.JDateChooser;
+import com.toedter.components.JSpinField;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -28,6 +31,10 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
     public VRegistroEntrevista() {
         initComponents();
         ((JTextField) this.DTPFechaEntrevista.getDateEditor()).setEditable(false);
+    }
+    
+    public void agregarItemListener(ItemListener il) {
+        cmbTipo.addItemListener(il);
     }
     
     /**
@@ -67,6 +74,21 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
         cmbTipo = new javax.swing.JComboBox<>();
         btnSalir = new javax.swing.JButton();
         cmbRif = new javax.swing.JComboBox<>();
+        jspHorasI = new com.toedter.components.JSpinField();
+        jspMinutosI = new com.toedter.components.JSpinField();
+        lblHoraI = new javax.swing.JLabel();
+        lblDosPuntos = new javax.swing.JLabel();
+        lblDosPuntos1 = new javax.swing.JLabel();
+        jspMinutosF = new com.toedter.components.JSpinField();
+        jspHorasF = new com.toedter.components.JSpinField();
+        lblHoraFin = new javax.swing.JLabel();
+        lblDuracionMinutos = new javax.swing.JLabel();
+        jspDuracion = new com.toedter.components.JSpinField();
+        lblDuracion = new javax.swing.JLabel();
+        cmbModo = new javax.swing.JComboBox<>();
+        lblModo = new javax.swing.JLabel();
+        lblModoPre = new javax.swing.JLabel();
+        cmbModoPre = new javax.swing.JComboBox<>();
         jpanEncabezado1 = new javax.swing.JPanel();
         lblRegistrarCandidato1 = new javax.swing.JLabel();
 
@@ -203,7 +225,7 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
 
         cmbTipo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "Presencial", "En línea" }));
-        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 150, 30));
+        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 150, 30));
 
         btnSalir.setBackground(new java.awt.Color(255, 153, 51));
         btnSalir.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -219,7 +241,80 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
         cmbRif.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "..." }));
         jPanel1.add(cmbRif, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 290, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 760, 597));
+        jspHorasI.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jspHorasI.setMaximum(23);
+        jspHorasI.setMinimum(0);
+        jPanel1.add(jspHorasI, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, 40, -1));
+
+        jspMinutosI.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jspMinutosI.setMaximum(59);
+        jspMinutosI.setMinimum(0);
+        jPanel1.add(jspMinutosI, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 380, 40, -1));
+
+        lblHoraI.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblHoraI.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoraI.setText("Hora de inicio: ");
+        jPanel1.add(lblHoraI, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 380, -1, 20));
+
+        lblDosPuntos.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        lblDosPuntos.setForeground(new java.awt.Color(255, 255, 255));
+        lblDosPuntos.setText(": ");
+        jPanel1.add(lblDosPuntos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, -1, -1));
+
+        lblDosPuntos1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        lblDosPuntos1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDosPuntos1.setText(": ");
+        jPanel1.add(lblDosPuntos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, -1, -1));
+
+        jspMinutosF.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jspMinutosF.setMaximum(59);
+        jspMinutosF.setMinimum(0);
+        jPanel1.add(jspMinutosF, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 410, 40, -1));
+
+        jspHorasF.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jspHorasF.setMaximum(23);
+        jspHorasF.setMinimum(0);
+        jPanel1.add(jspHorasF, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 410, 40, -1));
+
+        lblHoraFin.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblHoraFin.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoraFin.setText("Hora de fin: ");
+        jPanel1.add(lblHoraFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, -1, 20));
+
+        lblDuracionMinutos.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblDuracionMinutos.setForeground(new java.awt.Color(255, 255, 255));
+        lblDuracionMinutos.setText("minutos");
+        jPanel1.add(lblDuracionMinutos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, 20));
+
+        jspDuracion.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jspDuracion.setMaximum(120);
+        jspDuracion.setMinimum(0);
+        jPanel1.add(jspDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 390, 40, -1));
+
+        lblDuracion.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblDuracion.setForeground(new java.awt.Color(255, 255, 255));
+        lblDuracion.setText("Duración:");
+        jPanel1.add(lblDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 390, -1, 20));
+
+        cmbModo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        cmbModo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Video", "Audio", "Chat" }));
+        jPanel1.add(cmbModo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 340, 100, 30));
+
+        lblModo.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblModo.setForeground(new java.awt.Color(255, 255, 255));
+        lblModo.setText("Modo:");
+        jPanel1.add(lblModo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 350, -1, -1));
+
+        lblModoPre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        lblModoPre.setForeground(new java.awt.Color(255, 255, 255));
+        lblModoPre.setText("Modo:");
+        jPanel1.add(lblModoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 350, -1, -1));
+
+        cmbModoPre.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        cmbModoPre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Colectivo" }));
+        jPanel1.add(cmbModoPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 340, 100, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 800, 597));
 
         jpanEncabezado1.setBackground(new java.awt.Color(255, 153, 51));
         jpanEncabezado1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -228,10 +323,38 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
         lblRegistrarCandidato1.setText("REGISTRAR ENTREVISTAS");
         jpanEncabezado1.add(lblRegistrarCandidato1, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 22, -1, -1));
 
-        getContentPane().add(jpanEncabezado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 80));
+        getContentPane().add(jpanEncabezado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public JComboBox<String> getCmbModoPre() {
+        return cmbModoPre;
+    }
+
+    public JLabel getLblModoPre() {
+        return lblModoPre;
+    }
+
+    public JComboBox<String> getCmbModo() {
+        return cmbModo;
+    }
+
+    public JLabel getLblModo() {
+        return lblModo;
+    }
+
+    public JSpinField getJspDuracion() {
+        return jspDuracion;
+    }
+
+    public JLabel getLblDuracion() {
+        return lblDuracion;
+    }
+
+    public JLabel getLblDuracionMinutos() {
+        return lblDuracionMinutos;
+    }
 
     private void txtNomCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomCandidatoActionPerformed
         // TODO add your handling code here:
@@ -252,6 +375,38 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
     private void cmbCargoAspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCargoAspActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbCargoAspActionPerformed
+
+    public JLabel getLblDosPuntos() {
+        return lblDosPuntos;
+    }
+
+    public JLabel getLblDosPuntos1() {
+        return lblDosPuntos1;
+    }
+
+    public JLabel getLblHoraFin() {
+        return lblHoraFin;
+    }
+
+    public JLabel getLblHoraI() {
+        return lblHoraI;
+    }
+
+    public JSpinField getJspHorasF() {
+        return jspHorasF;
+    }
+
+    public JSpinField getJspHorasI() {
+        return jspHorasI;
+    }
+
+    public JSpinField getJspMinutosF() {
+        return jspMinutosF;
+    }
+
+    public JSpinField getJspMinutosI() {
+        return jspMinutosI;
+    }
 
     /**
      * @param args the command line arguments
@@ -408,6 +563,8 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbCargoAsp;
+    private javax.swing.JComboBox<String> cmbModo;
+    private javax.swing.JComboBox<String> cmbModoPre;
     private javax.swing.JComboBox<String> cmbRif;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JComboBox<String> cmbTitProy;
@@ -426,6 +583,19 @@ public class VRegistroEntrevista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpanEncabezado1;
+    private com.toedter.components.JSpinField jspDuracion;
+    private com.toedter.components.JSpinField jspHorasF;
+    private com.toedter.components.JSpinField jspHorasI;
+    private com.toedter.components.JSpinField jspMinutosF;
+    private com.toedter.components.JSpinField jspMinutosI;
+    private javax.swing.JLabel lblDosPuntos;
+    private javax.swing.JLabel lblDosPuntos1;
+    private javax.swing.JLabel lblDuracion;
+    private javax.swing.JLabel lblDuracionMinutos;
+    private javax.swing.JLabel lblHoraFin;
+    private javax.swing.JLabel lblHoraI;
+    private javax.swing.JLabel lblModo;
+    private javax.swing.JLabel lblModoPre;
     private javax.swing.JLabel lblRegistrarCandidato1;
     private javax.swing.JTextField txtEntrevistador;
     private javax.swing.JTextField txtNomCandidato;
@@ -440,6 +610,7 @@ public void agregarListener(ActionListener accion){
     this.btnRegistrar.addActionListener(accion);
     this.cmbRif.addActionListener(accion);
     this.btnNuevoCandidato.addActionListener(accion);
+    this.btnSalir.addActionListener(accion);
 }
 
 }

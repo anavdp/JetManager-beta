@@ -25,15 +25,15 @@ import modelo.Validaciones;
 public class DaoEntrevista {
    
    private ConexionSqlite1 con = ConexionSqlite1.getInstancia();
-    
+   
     public boolean insertarEntrevista(MEntrevista ent){
       
         String sql="insert into TEntrevista (EntRifCandidato,EntTipo,EntIdProyecto,EntFecha, EntCargoAsp,EntSalOfer,"
-                + "EntSalPret,EntObservaciones,EntEntrevistador) "
+                + "EntSalPret,EntObservaciones,EntEntrevistador, EntDuracion, EntModo) "
                 + " values ('"+ent.getEntIDCandidato()+"',"+ent.getEntTipo()+
                 ",'"+ent.getEntIdProy()+"','"+new SimpleDateFormat("yyyy-MM-dd").format(ent.getEntFecha())+"','"+ent.getEntCargoAsp()+"',"+
                 ent.getEntSalOfer()+","+ent.getSalPret()+",'"+ent.getEntObservaciones()+"','"+
-                ent.getEntEntrevistador()+"')";
+                ent.getEntEntrevistador()+"',"+ent.getDuracion()+",'"+ent.getModo()+"')";
                boolean agregado= con.ejecutar(sql);
                 return agregado;
                 }
@@ -55,8 +55,10 @@ public boolean buscarEntrevista(String rif, String codP){
 }
 public ResultSet consultarCandidatosNoAsignados() {
         ResultSet res;
-        String sql = "SELECT * FROM TEntrevista WHERE EntResultado != 'A'";
+        String sql = "SELECT EntRifCandidato, CanNombres, CanApellidos, CanPais, CanEmail FROM TEntrevista, TCandidato "
+                + "WHERE EntRifCandidato = CanRif AND EntResultado != 'A'";
         res = con.consultar(sql);
+        //res = ConexionSqlite1.consultar(sql);
         return res;
     }
 

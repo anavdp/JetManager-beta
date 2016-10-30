@@ -28,12 +28,19 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vista.VRegistroEntrevista;
 import controlador.CRegistroCliente;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
  * @author Vicky
  */
-public class CRegistroEntrevista implements ActionListener, KeyListener {
+public class CRegistroEntrevista implements ActionListener, KeyListener, ItemListener {
 
     private  static VRegistroEntrevista vre;
     private static ArrayList<MProyecto> proyectos;
@@ -45,6 +52,7 @@ public class CRegistroEntrevista implements ActionListener, KeyListener {
         vre= new VRegistroEntrevista();
         vre.setVisible(true);	
         vre.agregarListener(this);
+        vre.agregarItemListener(this);
         proyectos= new ArrayList<>();
         daoP=new DaoProyecto();
         daoCan= new DaoCandidato();
@@ -52,7 +60,21 @@ public class CRegistroEntrevista implements ActionListener, KeyListener {
         cargarCandidatos();
         cargarProyectos();
    
-        
+        vre.getLblHoraI().setVisible(false);
+        vre.getJspHorasI().setVisible(false);
+        vre.getLblDosPuntos().setVisible(false);
+        vre.getJspMinutosI().setVisible(false);
+        vre.getLblHoraFin().setVisible(false);
+        vre.getJspHorasF().setVisible(false);
+        vre.getLblDosPuntos1().setVisible(false);
+        vre.getJspMinutosF().setVisible(false);
+        vre.getLblDuracion().setVisible(false);
+        vre.getJspDuracion().setVisible(false);
+        vre.getLblDuracionMinutos().setVisible(false);
+        vre.getLblModo().setVisible(false);
+        vre.getCmbModo().setVisible(false);
+        vre.getLblModoPre().setVisible(false);
+        vre.getCmbModoPre().setVisible(false);
   //Agregar listener al cuadro de texto del rif
   
    
@@ -121,8 +143,27 @@ public class CRegistroEntrevista implements ActionListener, KeyListener {
                 JOptionPane.showMessageDialog(null, "Error: Este candidato ya realizo esta entrevista");
                 return;
             }
+        
+        MEntrevista ent;
+        if(vre.getCmbTipo().getSelectedIndex() == 1) {
+            ent = new MEntrevistaPresencial();
+            ent.setDuracion(vre.getJspDuracion().getValue());
+            ent.setModo(vre.getCmbModoPre().getSelectedItem().toString());
+        }
+        else {
+            ent = new MEntrevistaOnlineAdapter();
             
-           MEntrevista ent= new MEntrevista();
+            int[] horaI = new int[2];
+            int[] horaF = new int[2];
+            horaI[0] = vre.getJspHorasI().getValue();
+            horaI[1] = vre.getJspMinutosI().getValue();
+            horaF[0] = vre.getJspHorasF().getValue();
+            horaF[1] = vre.getJspMinutosF().getValue();
+            
+            ent.setDuracion(horaI, horaF);
+            ent.setModo(vre.getCmbModo().getSelectedItem().toString());
+        }
+           
            ent.setEntCargoAsp(vre.getCmbCargoAsp().getSelectedItem().toString());
            ent.setEntEntrevistador(vre.getTxtEntrevistador().getText());
            ent.setEntFecha(vre.getDTPFechaEntrevista().getDate());
@@ -190,7 +231,21 @@ public class CRegistroEntrevista implements ActionListener, KeyListener {
        vre.getCmbTipo().setSelectedIndex(0);
        vre.getTxtEntrevistador().setText("");
        vre.getTxtObservaciones().setText("");
-       
+       vre.getLblHoraI().setVisible(false);
+       vre.getJspHorasI().setVisible(false);
+        vre.getLblDosPuntos().setVisible(false);
+        vre.getJspMinutosI().setVisible(false);
+        vre.getLblHoraFin().setVisible(false);
+        vre.getJspHorasF().setVisible(false);
+        vre.getLblDosPuntos1().setVisible(false);
+        vre.getJspMinutosF().setVisible(false);
+        vre.getLblDuracion().setVisible(false);
+        vre.getJspDuracion().setVisible(false);
+        vre.getLblDuracionMinutos().setVisible(false);
+        vre.getLblModo().setVisible(false);
+        vre.getCmbModo().setVisible(false);
+        vre.getLblModoPre().setVisible(false);
+        vre.getCmbModoPre().setVisible(false);
    }
     public void soloNumeros(KeyEvent e){
         
@@ -234,6 +289,74 @@ public class CRegistroEntrevista implements ActionListener, KeyListener {
         }
         if(e.getSource().equals(vre.getBtnRegistrar())){
             agregarEntrevista();
+            
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        if(e.getSource().equals(vre.getCmbTipo())) {
+            if(vre.getCmbTipo().getSelectedIndex() == 2) {
+                vre.getLblDuracion().setVisible(false);
+                vre.getJspDuracion().setVisible(false);
+                vre.getLblDuracionMinutos().setVisible(false);
+                vre.getLblHoraI().setVisible(true);
+                vre.getJspHorasI().setVisible(true);
+                vre.getLblDosPuntos().setVisible(true);
+                vre.getJspMinutosI().setVisible(true);
+                vre.getLblHoraFin().setVisible(true);
+                vre.getJspHorasF().setVisible(true);
+                vre.getLblDosPuntos1().setVisible(true);
+                vre.getJspMinutosF().setVisible(true);
+                vre.getJspHorasI().setValue(0);
+                vre.getJspMinutosI().setValue(0);
+                vre.getJspHorasF().setValue(0);
+                vre.getJspMinutosF().setValue(0);
+                vre.getLblModo().setVisible(true);
+                vre.getCmbModo().setVisible(true);
+                vre.getLblModoPre().setVisible(false);
+                vre.getCmbModoPre().setVisible(false);
+            }
+            else if(vre.getCmbTipo().getSelectedIndex() == 1) {
+                vre.getLblHoraI().setVisible(false);
+                vre.getJspHorasI().setVisible(false);
+                vre.getLblDosPuntos().setVisible(false);
+                vre.getJspMinutosI().setVisible(false);
+                vre.getLblHoraFin().setVisible(false);
+                vre.getJspHorasF().setVisible(false);
+                vre.getLblDosPuntos1().setVisible(false);
+                vre.getJspMinutosF().setVisible(false);
+                vre.getLblDuracion().setVisible(true);
+                vre.getJspDuracion().setVisible(true);
+                vre.getLblDuracionMinutos().setVisible(true);
+                vre.getJspDuracion().setValue(0);
+                vre.getLblModo().setVisible(false);
+                vre.getCmbModo().setVisible(false);
+                vre.getLblModoPre().setVisible(true);
+                vre.getCmbModoPre().setVisible(true);
+            }
+            else {
+                vre.getLblHoraI().setVisible(false);
+                vre.getJspHorasI().setVisible(false);
+                vre.getLblDosPuntos().setVisible(false);
+                vre.getJspMinutosI().setVisible(false);
+                vre.getLblHoraFin().setVisible(false);
+                vre.getJspHorasF().setVisible(false);
+                vre.getLblDosPuntos1().setVisible(false);
+                vre.getJspMinutosF().setVisible(false);
+                vre.getLblDuracion().setVisible(false);
+                vre.getJspDuracion().setVisible(false);
+                vre.getLblDuracionMinutos().setVisible(false);
+                vre.getJspHorasI().setValue(0);
+                vre.getJspMinutosI().setValue(0);
+                vre.getJspHorasF().setValue(0);
+                vre.getJspMinutosF().setValue(0);
+                vre.getJspDuracion().setValue(0);
+                vre.getLblModo().setVisible(false);
+                vre.getCmbModo().setVisible(false);
+                vre.getLblModoPre().setVisible(false);
+                vre.getCmbModoPre().setVisible(false);
+            }
         }
     }
     

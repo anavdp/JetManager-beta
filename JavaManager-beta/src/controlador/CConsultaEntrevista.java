@@ -45,18 +45,21 @@ private DaoEntrevista dE;
     public void cargarCombos(){
         
         ResultSet proy,cand;
-        cand= dC.ConsultarCandidatos();
-        proy= dP.consultarProyectos();
         try{
-        while(cand.next()){
-            vce.getCmbCandidato().addItem(cand.getString("CanRif"));
-        }
-        while(proy.next()){
-            vce.getCmbProyecto().addItem(proy.getString("ProyId"));
-        }
+            cand= dC.ConsultarCandidatos();
+            while(cand.next()){
+                vce.getCmbCandidato().addItem(cand.getString("CanRif"));
+            }
+            cand.close();
+            proy= dP.consultarProyectos();
+            while(proy.next()){
+                vce.getCmbProyecto().addItem(proy.getString("ProyId"));
+            }
+            proy.close();
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
+        
     }
     public void selectFecha(){
         ResultSet rs= dE.consultarEntrevistaPorFecha(vce.getjDateChooser1().getDate(), vce.getjDateChooser2().getDate());
@@ -165,28 +168,31 @@ private DaoEntrevista dE;
             vce.getPanelFecha().setVisible(false);
             vce.getPanelCand().setVisible(false);
         }
-          if(e.getSource().equals(vce.getRadFecha())){
+        if(e.getSource().equals(vce.getRadFecha())){
            vce.getPanelProyecto().setVisible(false);
             vce.getPanelFecha().setVisible(true);
             vce.getPanelCand().setVisible(false);
         }
-            if(e.getSource().equals(vce.getRadCandidato())){
+        if(e.getSource().equals(vce.getRadCandidato())){
             vce.getPanelProyecto().setVisible(false);
             vce.getPanelFecha().setVisible(false);
             vce.getPanelCand().setVisible(true);
         }
-                if(e.getSource().equals(vce.getBtnConsultar())){
-                if(vce.getButtonGroup1().getSelection().equals(vce.getRadFecha())){
-                    selectFecha();
-                    
-                }
-                if(vce.getButtonGroup1().getSelection().equals(vce.getRadProy())){
-                    selectProy();
-                }
-                if(vce.getButtonGroup1().getSelection().equals(vce.getRadCandidato())){
-                    selectCand();
-                }
+        if(e.getSource().equals(vce.getBtnConsultar())){
+            if(vce.getButtonGroup1().getSelection().equals(vce.getRadFecha())){
+                selectFecha();
+                
             }
+            if(vce.getButtonGroup1().getSelection().equals(vce.getRadProy())){
+                selectProy();
+            }
+            if(vce.getButtonGroup1().getSelection().equals(vce.getRadCandidato())){
+                selectCand();
+            }
+        }
+        if(e.getSource().equals(vce.getBtnSalir())) {
+            vce.dispose();
+        }
     }
     
 }
