@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package vista;
+
 /**
- *Jet Manager- Integrantes:
+ *
  * @author JOSÉ PIRELA
  * @author ANA DE PALMA
- * @author JULIO PAREDES
- * @author RICARDO ABUNASSAR
+ * @author JULIO PALACIOS
+ * @author ABUNASSAR PENARANDA
  * @author JESÚS RANGEL
  */
 
@@ -107,14 +108,6 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
 
     public void setBtnCalConsulta(JButton btnCalConsulta) {
         this.btnCalConsulta = btnCalConsulta;
-    }
-
-    public JButton getBtnCalcular() {
-        return btnCalcular;
-    }
-
-    public void setBtnCalcular(JButton btnCalcular) {
-        this.btnCalcular = btnCalcular;
     }
 
     public JButton getBtnCancelar() {
@@ -338,7 +331,6 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
     {
         this.btnBuscar.addActionListener(a);
         this.btnCalConsulta.addActionListener(a);
-        this.btnCalcular.addActionListener(a);
         this.btnCancelar.addActionListener(a);
         this.btnCancelarCon.addActionListener(a);
         this.btnRegistrar.addActionListener(a);
@@ -367,7 +359,6 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
         lblMes = new javax.swing.JLabel();
         lblHoras = new javax.swing.JLabel();
         txtHoras = new javax.swing.JTextField();
-        btnCalcular = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         MesCalcular = new com.toedter.calendar.JMonthChooser();
@@ -393,14 +384,14 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
         btnBuscarRifconsulta = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Horas Laboradas");
 
         panelRegistro.setBackground(new java.awt.Color(102, 102, 102));
 
         lblRif.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lblRif.setForeground(new java.awt.Color(255, 255, 255));
-        lblRif.setText("Rif");
+        lblRif.setText("ID Empleado");
 
         txtCedula.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtCedula.setToolTipText("");
@@ -430,11 +421,6 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
         txtHoras.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtHoras.setToolTipText("Ej: 100");
         txtHoras.setEnabled(false);
-
-        btnCalcular.setBackground(new java.awt.Color(255, 153, 51));
-        btnCalcular.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        btnCalcular.setText("Calcular");
-        btnCalcular.setToolTipText("Calcula horas laboradas");
 
         btnRegistrar.setBackground(new java.awt.Color(255, 153, 51));
         btnRegistrar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
@@ -474,11 +460,10 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
                         .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelRegistroLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCalcular)
-                                    .addComponent(btnBuscar)))
+                                .addComponent(btnBuscar)
+                                .addGap(8, 8, 8))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRegistroLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                                 .addComponent(MesCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27))))))
         );
@@ -499,12 +484,11 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
                     .addComponent(lblMes)
                     .addComponent(MesCho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MesCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(81, 81, 81)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHoras)
-                    .addComponent(txtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCalcular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                    .addComponent(txtHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addGroup(panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
                     .addComponent(btnCancelar))
@@ -525,7 +509,7 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
 
         lblCedulaConsulta.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         lblCedulaConsulta.setForeground(new java.awt.Color(255, 255, 255));
-        lblCedulaConsulta.setText("Rif");
+        lblCedulaConsulta.setText("ID Empleado");
 
         txtCedulaConsulta.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         txtCedulaConsulta.setEnabled(false);
@@ -739,7 +723,6 @@ public class VGestionHorasLaboradas extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarRifconsulta;
     private javax.swing.JButton btnCalConsulta;
-    private javax.swing.JButton btnCalcular;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarCon;
     private javax.swing.JButton btnOk;

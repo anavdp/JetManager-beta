@@ -1,14 +1,18 @@
-/**
- *Jet Manager- Integrantes:
- * @author JOSÉ PIRELA
- * @author ANA DE PALMA
- * @author JULIO PAREDES
- * @author RICARDO ABUNASSAR
- * @author JESÚS RANGEL
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package vista;
 
-
+/**
+ *
+ * @author JOSÉ PIRELA
+ * @author ANA DE PALMA
+ * @author JULIO PALACIOS
+ * @author ABUNASSAR PENARANDA
+ * @author JESÚS RANGEL
+ */
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JMonthChooser;
@@ -33,6 +37,22 @@ public class VDiaFeriado extends javax.swing.JFrame {
      */
     public VDiaFeriado() {
         initComponents();
+    }
+
+    public JButton getBtnRestablecer() {
+        return btnRestablecer;
+    }
+
+    public void setBtnRestablecer(JButton btnRestablecer) {
+        this.btnRestablecer = btnRestablecer;
+    }
+
+    public JButton getBtnModificar() {
+        return btnModificar;
+    }
+
+    public void setBtnModificar(JButton btnModificar) {
+        this.btnModificar = btnModificar;
     }
 
     public JLabel getLblCantDiasFeriados() {
@@ -227,6 +247,8 @@ public class VDiaFeriado extends javax.swing.JFrame {
         this.btnConsultar.addActionListener(a);
         this.btnRegistrar.addActionListener(a);
         this.btnEliminar.addActionListener(a);
+        this.btnModificar.addActionListener(a);
+        this.btnRestablecer.addActionListener(a);
 
     }
     /**
@@ -246,6 +268,8 @@ public class VDiaFeriado extends javax.swing.JFrame {
         labelDescripcion = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnRestablecer = new javax.swing.JButton();
         panelBotones = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -262,7 +286,7 @@ public class VDiaFeriado extends javax.swing.JFrame {
         lblCantDiasFeriados = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JetManager - Días Feriados");
 
         tabbedPane.setBackground(new java.awt.Color(102, 102, 102));
@@ -290,6 +314,14 @@ public class VDiaFeriado extends javax.swing.JFrame {
         btnBuscar.setText("Buscar");
         btnBuscar.setToolTipText("Busca la fecha seleccionada");
 
+        btnModificar.setBackground(new java.awt.Color(255, 153, 51));
+        btnModificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnModificar.setText("Modificar");
+
+        btnRestablecer.setBackground(new java.awt.Color(255, 153, 51));
+        btnRestablecer.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        btnRestablecer.setText("Restablecer");
+
         javax.swing.GroupLayout panelTipeoLayout = new javax.swing.GroupLayout(panelTipeo);
         panelTipeo.setLayout(panelTipeoLayout);
         panelTipeoLayout.setHorizontalGroup(
@@ -305,8 +337,13 @@ public class VDiaFeriado extends javax.swing.JFrame {
                         .addComponent(Calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(btnBuscar))
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTipeoLayout.createSequentialGroup()
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(panelTipeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRestablecer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         panelTipeoLayout.setVerticalGroup(
             panelTipeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,8 +356,10 @@ public class VDiaFeriado extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(panelTipeoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescripcion)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRestablecer))
         );
 
         panelBotones.setBackground(new java.awt.Color(102, 102, 102));
@@ -347,9 +386,9 @@ public class VDiaFeriado extends javax.swing.JFrame {
             .addGroup(panelBotonesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnRegistrar)
-                .addGap(53, 53, 53)
+                .addGap(81, 81, 81)
                 .addComponent(btnCancelar)
-                .addGap(61, 61, 61)
+                .addGap(73, 73, 73)
                 .addComponent(btnEliminar)
                 .addGap(99, 99, 99))
         );
@@ -375,8 +414,8 @@ public class VDiaFeriado extends javax.swing.JFrame {
             panelRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRegistroLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(panelTipeo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelTipeo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -401,7 +440,7 @@ public class VDiaFeriado extends javax.swing.JFrame {
             .addGroup(panelMensualLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addComponent(MesCho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67)
                 .addComponent(btnConsultar)
@@ -548,7 +587,9 @@ public class VDiaFeriado extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRestablecer;
     private javax.swing.JButton btnSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JYearChooser jYearChooser1;

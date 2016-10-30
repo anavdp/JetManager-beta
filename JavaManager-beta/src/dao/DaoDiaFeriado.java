@@ -5,13 +5,12 @@
  */
 package dao;
 
-//**
- /*Jet Manager- Integrantes:
+/**
+ *
  * @author JOSÉ PIRELA
  * @author ANA DE PALMA
- * @author JULIO PAREDES
- * @author RICARDO ABUNASSAR
- * @author JESÚS RANGEL
+ * @author JULIO PALACIOS
+ * @author ABUNASSAR PENARANDA
  */
 
 import modelo.MDiaFeriado;
@@ -26,7 +25,6 @@ public class DaoDiaFeriado {
     
     private String sql;
     private ResultSet r;
-    private ConexionSqlite1 con = ConexionSqlite1.getInstancia();
 
     
     public boolean InsetarDiaFeriado(MDiaFeriado dia) //Aquí va un throws
@@ -49,7 +47,7 @@ public class DaoDiaFeriado {
         System.out.println("Fecha: " + dia.getFecha());
         System.out.println("Estatus: " + dia.getEstatus());
         
-        return con.ejecutar(sql);
+        return ConexionSqlite1.ejecutar(sql);
     }
          
   public boolean EliminarDiaFeriado(MDiaFeriado dia)
@@ -59,7 +57,7 @@ public class DaoDiaFeriado {
       
       sql = sql + " WHERE DFFecha='" + dia.getFecha() + "'";
       
-      return con.ejecutar(sql);
+      return ConexionSqlite1.ejecutar(sql);
   }
     
   public ResultSet ObtenerDiasParaTablaMensual(MDiaFeriado dia) //throws ClassNotFoundException
@@ -67,7 +65,7 @@ public class DaoDiaFeriado {
       sql = "SELECT DFFecha, DFDescripcion FROM TDiaFeriado WHERE DFMes=" + dia.getMes();
       sql = sql + " AND DFAnio=" + dia.getAnio();
       
-      r = con.consultar(sql);
+      r = ConexionSqlite1.consultar(sql);
 
       return r;
   }
@@ -77,8 +75,25 @@ public class DaoDiaFeriado {
       sql = "SELECT DFDescripcion FROM TDiaFeriado WHERE DFFecha='" + dia.getFecha() + "'";
       sql = sql + " AND DFEstatus='" + dia.getEstatus() + "'";
       
-      r = con.consultar(sql);
+      r = ConexionSqlite1.consultar(sql);
       
       return r;
+  }
+  
+  public boolean ModificarDescipcion(MDiaFeriado dia)
+  {
+      sql = "UPDATE TDiaFeriado SET DFDescripcion='";
+      sql = sql + dia.getDescripcion() + "'";
+      sql = sql + " WHERE DFFecha = '" + dia.getFecha() + "'";
+      
+      return ConexionSqlite1.ejecutar(sql);
+  }
+  
+  
+  //Ésto no pertenece a éste DAO, lo uso para llenar la tabla por aquí porque no me deja hacerlo directamente en la tabla
+  public boolean InsertarEmpleado()
+  {
+     sql = "INSERT INTO TPagoMensual (PagIdEmpleado, PagFecha, PagHorasTrabajadas, PagMonto, PagMes) VALUES (10, '1992-04-10', 120, 200.2, 4)";
+    return ConexionSqlite1.ejecutar(sql);
   }
 }

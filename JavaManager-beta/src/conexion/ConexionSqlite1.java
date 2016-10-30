@@ -147,6 +147,10 @@ public class ConexionSqlite1 implements Serializable
     }
  return rs;
   }
+
+    private ConexionSqlite1() {
+    }
+        
          
 }
              

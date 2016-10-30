@@ -83,6 +83,16 @@ public class MDiaFeriado {
         this.estatus = estatus;
     }
     
+    //Memento
+    public MMemento CrearMemento()
+    {
+        return new MMemento(descripcion);
+    }
     
+    //Memento
+    public void EstablecerMemento(MMemento m)
+    {
+        descripcion = m.getEstado();
+    }
     
 }

@@ -8,12 +8,13 @@
 package controlador;
 
 /**
- *Jet Manager- Integrantes:
+ *
  * @author JOSÉ PIRELA
  * @author ANA DE PALMA
- * @author JULIO PAREDES
- * @author RICARDO ABUNASSAR
+ * @author JULIO PALACIOS
+ * @author ABUNASSAR PENARANDA
  * @author JESÚS RANGEL
+ * 
  */
 
 import dao.DaoGestionHorasLaboradas;
@@ -32,6 +33,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import vista.VGestionHorasLaboradas;
 import modelo.MEmpleado;
+import modelo.MDiaFeriado;
         
 public class CGestionHorasLaboradas implements ActionListener, KeyListener{
 
@@ -43,11 +45,15 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
     private int contDiasLabo;
     private SimpleDateFormat formato;
     private int horasLabMensual;
-    private int cantidadFaltas; //para el select count
+    private int cantidadFaltas;
+    private int contFeriados;
+    private SimpleDateFormat formatoMes;
+    private MDiaFeriado dia;
            
     
     public CGestionHorasLaboradas() throws SQLException {
-        
+        formatoMes = new SimpleDateFormat();
+        dia = new MDiaFeriado();
         horas = new VGestionHorasLaboradas();
         empleado = new MEmpleado();
         daoHoras = new DaoGestionHorasLaboradas();
@@ -55,7 +61,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
         horas.setVisible(true);
         horas.getMesCalcular().setVisible(false);
         horas.getPanelConsulta().setVisible(false);
-        JOptionPane.showMessageDialog(null, "Seleccione el mes antes de buscar el Rif", "Jet-Manager", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Seleccione el mes antes de buscar el ID", "Jet-Manager", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void LimpiarRe()
@@ -125,7 +131,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
                 }
     }
     
-    public void BuscarRif()
+    public void BuscarID()
     {
         if(horas.getTxtCedula().getText().equals(""))
         {
@@ -134,7 +140,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
        else
         {
            
-                empleado.setRif(horas.getTxtCedula().getText());
+                empleado.setID(Integer.valueOf(horas.getTxtCedula().getText()));
                 
                 r = daoHoras.BuscarRif(empleado);
                 
@@ -146,7 +152,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "Rif no encontrado", "Jet-Manager", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "El ID no fue encontrado", "Jet-Manager", javax.swing.JOptionPane.INFORMATION_MESSAGE);
                 }
                 r.close();
             } catch (SQLException ex) {
@@ -157,13 +163,14 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
     }
     
    public int ContarFaltas()
-    { contFaltas = 0;
-        r = daoHoras.ObtenerFaltas();
+    { 
+        contFaltas = 0;
+        empleado.setID(Integer.valueOf(horas.getTxtCedula().getText()));
+        r = daoHoras.ObtenerFaltas(empleado);
         try {
             while(r.next())
             {
-                contFaltas++;
-                
+                contFaltas++; 
             }
             r.close();
         } catch (SQLException ex) {
@@ -174,7 +181,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
     
     public int calcularHorasLaborables()
     {
-        
+        ContarFeriados();
         ContarFaltas();
          horasLabMensual = 0;
          contDiasLabo = 0;
@@ -202,7 +209,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
          }
          
          
-        return horasLabMensual = (cuenta2 - ContarFaltas() - cuenta) * 8;
+        return horasLabMensual = (cuenta2 - ContarFaltas() - cuenta - ContarFeriados()) * 8;
         
     }
     
@@ -214,9 +221,11 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
         }
         else
         {
-            empleado.setID(Integer.valueOf(horas.getTxtHoras().getText()));
+            empleado.setHorasLaboradas(Integer.valueOf(horas.getTxtHoras().getText()));
+            empleado.setID(Integer.valueOf(horas.getTxtCedula().getText()));
+            dia.setMes(Integer.valueOf(horas.getMesCho().getMonth() + 1));
             
-            daoHoras.InsertarHoras(empleado);
+            daoHoras.InsertarHoras(empleado, dia);
         }
     }
     
@@ -241,6 +250,27 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
             }
         }
     }
+    
+    public int ContarFeriados()
+    {
+        dia.setMes(horas.getMesCho().getMonth() + 1);
+        dia.setAnio(horas.getAñoCho().getYear());
+        contFeriados = 0;
+        
+        r = daoHoras.ObtenerFeriados(dia);
+        
+        try {
+            while(r.next())
+            {
+                contFeriados++;
+            }
+            r.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CGestionHorasLaboradas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contFeriados;
+    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -260,7 +290,7 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
         //Botón Buscar
         if(e.getSource().equals(horas.getBtnBuscar()))
         {
-                BuscarRif();
+                BuscarID();
         }
 
         //Botón Registrar
@@ -270,10 +300,10 @@ public class CGestionHorasLaboradas implements ActionListener, KeyListener{
             LimpiarRe();
         }
         
-        //Botón Buscar Rif pero en Consulta
+        //Botón Buscar ID pero en Consulta
         if(e.getSource().equals(horas.getBtnBuscarRifconsulta()))
         {
-            BuscarRif();
+            BuscarID();
         }
         
         //Botón Ok del tipo de consulta

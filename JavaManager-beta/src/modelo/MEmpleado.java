@@ -1,10 +1,7 @@
-/**
- *Jet Manager- Integrantes:
- * @author JOSÉ PIRELA
- * @author ANA DE PALMA
- * @author JULIO PAREDES
- * @author RICARDO ABUNASSAR
- * @author JESÚS RANGEL
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package modelo;
 
@@ -12,10 +9,16 @@ import java.util.Date;
 
 /**
  *
+ * @author JOSÉ PIRELA
+ * @author ANA DE PALMA
+ * @author JULIO PALACIOS
  * @author ABUNASSAR PENARANDA
+ * @author JESÚS RANGEL
  */
 public class MEmpleado extends MCandidato {
+    
      private int ID;
+     private int horasLaboradas; //Ésto lo agregué
      private String rif;
      private String tipoMoneda;
      private String TipoPago;
@@ -25,12 +28,21 @@ public class MEmpleado extends MCandidato {
         super();
     }
 
-    public MEmpleado(int ID, String rif, String tipoMoneda, String TipoPago, float salario) {
+    public MEmpleado(int ID, String rif, String tipoMoneda, String TipoPago, float salario, int horasLaboradas) {
         this.ID = ID;
         this.rif = rif;
         this.tipoMoneda = tipoMoneda;
         this.TipoPago = TipoPago;
         this.salario = salario;
+        this.horasLaboradas = horasLaboradas;
+    }
+
+    public int getHorasLaboradas() {
+        return horasLaboradas;
+    }
+
+    public void setHorasLaboradas(int horasLaboradas) {
+        this.horasLaboradas = horasLaboradas;
     }
 
 
@@ -73,14 +85,5 @@ public class MEmpleado extends MCandidato {
     public void setSalario(float salario) {
         this.salario = salario;
     }
-     
-     
-    public MEmpleado(int id, String tipoMoneda, String tipoPago, float salario, String rif, String nombres, String apellidos, Date fechaNacimiento, char edoCivil, String direccion, String ciudad, String pais, String email, String telefono, String codTelefono, String[] palabrasClave) {
-        super(rif, nombres, apellidos, fechaNacimiento, edoCivil, direccion, ciudad, pais, email, telefono, codTelefono, palabrasClave);
-        this.ID = id;
-        this.tipoMoneda = tipoMoneda;
-        this.TipoPago = tipoPago;
-        this.salario = salario;
-    }
-
+    
 }
