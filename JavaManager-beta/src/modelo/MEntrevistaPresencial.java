@@ -22,6 +22,7 @@ public class MEntrevistaPresencial implements MEntrevista {
     private float entSalOfer, entSalPret;
     private char resultado;
 
+//<<<<<<< HEAD
     public MEntrevistaPresencial(String entCargoAsp, long duracion, Date entFecha, float entSalOfer, char resultado) {
         this.entCargoAsp = entCargoAsp;
         this.duracion = duracion;
@@ -41,6 +42,8 @@ public class MEntrevistaPresencial implements MEntrevista {
     
     
 
+//=======
+//>>>>>>> origin/master
     public MEntrevistaPresencial(String entIDCandidato, String entIdProy, String entCargoAsp, String entEntrevistador, String entObservaciones, String modo, int entTipo, int duracion, Date entFecha, float entSalOfer, float salPret, char resultado) {
         this.entIDCandidato = entIDCandidato;
         this.entIdProy = entIdProy;
