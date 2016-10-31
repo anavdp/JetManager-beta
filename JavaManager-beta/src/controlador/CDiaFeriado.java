@@ -337,9 +337,9 @@ public class CDiaFeriado implements ActionListener, KeyListener{
             {
                 m = c.GetMemento(c.getEstados().size() - 1);
 
-                //diaF.getTxtDescripcion().setText(m.getEstado());
+               diaF.getTxtDescripcion().setText(m.getEstado());
                 
-                dia.setDescripcion(m.getEstado());
+                dia.EstablecerMemento(m);
                 
                 daoDia.ModificarDescipcion(dia);
                 

@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public interface MEntrevista {
     
+    
     public String getEntIDCandidato();
     public void setEntIDCandidato(String entIDCandidato);
     public String getEntIdProy();
@@ -36,5 +37,7 @@ public interface MEntrevista {
     public void setDuracion(int[] horaI, int[] horaF);
     public String getModo();
     public void setModo(String modo);
+    public char getResultado();
+    public void setResultado(char resultado);
     
 }

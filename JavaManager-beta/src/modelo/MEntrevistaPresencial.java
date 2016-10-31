@@ -15,13 +15,33 @@ import java.util.Date;
  * @author Vicky
  */
 public class MEntrevistaPresencial implements MEntrevista {
-    private String entIDCandidato, entIdProy, entCargoAsp, entEntrevistador, entObservaciones, modo;
+     private String entIDCandidato, entIdProy, entCargoAsp, entEntrevistador, entObservaciones, modo;
     private int entTipo;
     private long duracion;
     private Date entFecha;
     private float entSalOfer, entSalPret;
+    private char resultado;
 
-    public MEntrevistaPresencial(String entIDCandidato, String entIdProy, String entCargoAsp, String entEntrevistador, String entObservaciones, String modo, int entTipo, int duracion, Date entFecha, float entSalOfer, float salPret) {
+    public MEntrevistaPresencial(String entCargoAsp, long duracion, Date entFecha, float entSalOfer, char resultado) {
+        this.entCargoAsp = entCargoAsp;
+        this.duracion = duracion;
+        this.entFecha = entFecha;
+        this.entSalOfer = entSalOfer;
+        this.resultado = resultado;
+    }
+
+    
+    public MEntrevistaPresencial(String modo, int entTipo, long duracion, Date entFecha, char resultado) {
+        this.modo = modo;
+        this.entTipo = entTipo;
+        this.duracion = duracion;
+        this.entFecha = entFecha;
+        this.resultado = resultado;
+    }
+    
+    
+
+    public MEntrevistaPresencial(String entIDCandidato, String entIdProy, String entCargoAsp, String entEntrevistador, String entObservaciones, String modo, int entTipo, int duracion, Date entFecha, float entSalOfer, float salPret, char resultado) {
         this.entIDCandidato = entIDCandidato;
         this.entIdProy = entIdProy;
         this.entCargoAsp = entCargoAsp;
@@ -33,6 +53,25 @@ public class MEntrevistaPresencial implements MEntrevista {
         this.entFecha = entFecha;
         this.entSalOfer = entSalOfer;
         this.entSalPret = salPret;
+        this.resultado = resultado;
+    }
+
+    public float getEntSalPret() {
+        return entSalPret;
+    }
+
+    public void setEntSalPret(float entSalPret) {
+        this.entSalPret = entSalPret;
+    }
+
+    @Override
+    public char getResultado() {
+        return resultado;
+    }
+
+    @Override
+    public void setResultado(char resultado) {
+        this.resultado = resultado;
     }
 
     @Override

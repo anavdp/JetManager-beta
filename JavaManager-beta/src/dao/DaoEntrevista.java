@@ -86,7 +86,7 @@ public ResultSet consultarEntrevistaPorProyecto(String proy){
 
 public ResultSet consultarEntrevistaPorProyectoTabla(String proy){
         ResultSet res;
-        String sql = "Select EntFecha, CanNombres, EntCargoAsp, EntSalOfer, EntResultado, EntDuracion"
+        String sql = "Select EntFecha, CanNombres, EntCargoAsp, EntSalOfer, EntResultado, EntDuracion, EntTipo "
                 + " from TEntrevista, TCandidato where "
                 + "EntRifCandidato=CanRif and EntIdProyecto='"+proy+"'";
         res = con.consultar(sql);
@@ -94,7 +94,7 @@ public ResultSet consultarEntrevistaPorProyectoTabla(String proy){
 }
 
 public ResultSet consultarTaplaPorCandidato(String rif){
-    String sql= "Select EntFecha, ProyTitulo, EntTipo, EntDuracion, EntResultado"
+    String sql= "Select EntFecha, ProyTitulo, EntTipo, EntDuracion, EntResultado, EntModo"
             + " from TEntrevista, TProyecto where"
             + "  EntIdProyecto= ProyId and EntRifCandidato='"+rif+"'";
     ResultSet rs= con.consultar(sql);

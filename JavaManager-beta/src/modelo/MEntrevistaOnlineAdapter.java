@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class MEntrevistaOnlineAdapter implements MEntrevista {
 
-    private MEntrevistaOnline entrevistaOnline;
+     private MEntrevistaOnline entrevistaOnline;
 
     public MEntrevistaOnlineAdapter() {
         entrevistaOnline = new MEntrevistaOnline();
@@ -120,7 +120,14 @@ public class MEntrevistaOnlineAdapter implements MEntrevista {
 
     @Override
     public void setDuracion(long duracion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int[] horaI = new int[2];
+        int[] horaF = new int[2];
+        horaI[0] = 0;
+        horaI[1] = 0;
+        horaF[1] = (int) (duracion % 60);
+        horaF[0] = (int) (duracion / 60);
+        entrevistaOnline.setHoraInicio(horaI);
+        entrevistaOnline.setHoraFin(horaF);
     }
 
     @Override
@@ -137,6 +144,16 @@ public class MEntrevistaOnlineAdapter implements MEntrevista {
     @Override
     public void setModo(String modo) {
         entrevistaOnline.setModo(modo);
+    }
+
+    @Override
+    public char getResultado() {
+        return entrevistaOnline.getResultado();
+    }
+
+    @Override
+    public void setResultado(char resultado) {
+        entrevistaOnline.setResultado(resultado);
     }
     
 }

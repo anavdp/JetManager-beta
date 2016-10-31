@@ -176,6 +176,7 @@ public class VConsultaEntrevista extends javax.swing.JFrame {
         jPanel1.add(panelFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 180, 80));
         panelFecha.setVisible(false);
 
+        tabla.setAutoCreateRowSorter(true);
         tabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 51)));
         tabla.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         tabla.setSelectionBackground(new java.awt.Color(255, 153, 51));
