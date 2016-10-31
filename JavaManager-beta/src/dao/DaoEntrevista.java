@@ -70,13 +70,8 @@ public ResultSet consultarEntrevistasPorCandidato(String rif) {
     }
 public ResultSet consultarEntrevistaPorFecha(Date fi, Date f2)
 {
-String sql="  SELECT TEntrevista.EntFecha, TCandidato.CanNombres,TProyecto.ProyTitulo,TEntrevista.EntResultado"+
-"FROM TEntrevista INNER JOIN TCandidato ON (TEntrevista.EntRifCandidato = TCandidato.CanRif)"+
- "INNER JOIN TProyecto ON (TEntrevista.EntIdProyecto = TProyecto.ProyId)"+
-"WHERE"+
- " TEntrevista.EntRifCandidato = TCandidato.CanRif AND "+
-  "TEntrevista.EntIdProyecto = TProyecto.ProyId AND "+
-  "TEntrevista.EntFecha BETWEEN '" +
+String sql=" Select  EntFecha, CanNombres, ProyTitulo, EntTipo, EntModo, EntDuracion, EntResultado "
+        + " from TEntrevista, TCandidato, TProyecto where EntRifCandidato=CanRif and EntIdProyecto= ProyId and  EntFecha BETWEEN '" +
             new SimpleDateFormat("yyyy-MM-dd").format(fi) + "' "
             + "and '" + new SimpleDateFormat("yyyy-MM-dd").format(f2) + "';";
     ResultSet rs= con.consultar(sql);
@@ -91,56 +86,17 @@ public ResultSet consultarEntrevistaPorProyecto(String proy){
 
 public ResultSet consultarEntrevistaPorProyectoTabla(String proy){
         ResultSet res;
-        String sql = "SELECT \n" +
-"  TEntrevista.EntFecha,\n" +
-"  TEntrevista.EntResultado,\n" +
-"  TCandidato.CanNombres,\n" +
-"  TEntrevista.EntSalOfer,\n" +
-"  TEntrevista.EntCargoAsp\n" +
-"FROM\n" +
-"  TEntrevista\n" +
-"  INNER JOIN TCandidato ON (TEntrevista.EntRifCandidato = TCandidato.CanRif)\n" +
-"  INNER JOIN TProyecto ON (TEntrevista.EntIdProyecto = TProyecto.ProyId)\n" +
-"WHERE\n" +
-"  TEntrevista.EntRifCandidato = TCandidato.CanRif AND \n" +
-"  TEntrevista.EntIdProyecto = TProyecto.ProyId AND \n" +
-"  TProyecto.ProyId ='" + proy + "' "+
-"GROUP BY\n" +
-"  TEntrevista.EntFecha,\n" +
-"  TEntrevista.EntResultado\n" +
-"ORDER BY\n" +
-"  TEntrevista.EntFecha,\n" +
-"  TCandidato.CanNombres,\n" +
-"  TEntrevista.EntCargoAsp,\n" +
-"  TEntrevista.EntSalOfer,\n" +
-"  TEntrevista.EntResultado" ;
+        String sql = "Select EntFecha, CanNombres, EntCargoAsp, EntSalOfer, EntResultado, EntDuracion"
+                + " from TEntrevista, TCandidato where "
+                + "EntRifCandidato=CanRif and EntIdProyecto='"+proy+"'";
         res = con.consultar(sql);
         return res;
 }
 
 public ResultSet consultarTaplaPorCandidato(String rif){
-    String sql= "SELECT \n" +
-"  TEntrevista.EntFecha,\n" +
-"  TProyecto.ProyTitulo,\n" +
-"  TEntrevista.EntResultado,\n" +
-"  TEntrevista.EntEntrevistador\n" +
-"FROM\n" +
-"  TEntrevista\n" +
-"  INNER JOIN TCandidato ON (TEntrevista.EntRifCandidato = TCandidato.CanRif)\n" +
-"  INNER JOIN TProyecto ON (TEntrevista.EntIdProyecto = TProyecto.ProyId)\n" +
-"WHERE\n" +
-"  TEntrevista.EntRifCandidato = TCandidato.CanRif AND \n" +
-"  TEntrevista.EntIdProyecto = TProyecto.ProyId AND \n" +
-"  TCandidato.CanRif='"+rif+"' " +
-"GROUP BY\n" +
-"  TEntrevista.EntFecha,\n" +
-"  TProyecto.ProyTitulo,\n" +
-"  TEntrevista.EntResultado\n" +
-"ORDER BY\n" +
-"  TEntrevista.EntFecha,\n" +
-"  TProyecto.ProyTitulo,\n" +
-"  TEntrevista.EntEntrevistador,\n" +
-"  TEntrevista.EntResultado";
+    String sql= "Select EntFecha, ProyTitulo, EntTipo, EntDuracion, EntResultado"
+            + " from TEntrevista, TProyecto where"
+            + "  EntIdProyecto= ProyId and EntRifCandidato='"+rif+"'";
     ResultSet rs= con.consultar(sql);
     return rs;
 }
