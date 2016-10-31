@@ -19,6 +19,15 @@ public class MEntrevistaOnline {
     private int[] horaFin = new int[2];
     private Date fecha;
     private float salOfer, salPret;
+    private char resultado;
+
+    public char getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(char resultado) {
+        this.resultado = resultado;
+    }
 
     public String getModo() {
         return modo;
@@ -28,7 +37,7 @@ public class MEntrevistaOnline {
         this.modo = modo;
     }
 
-    public MEntrevistaOnline(String idCandidato, String idProy, String cargoAsp, String entrevistador, String observaciones, String modo, int entTipo, int[] horaInicio, int[] horaFin, Date entFecha, float entSalOfer, float entSalPret) {
+    public MEntrevistaOnline(String idCandidato, String idProy, String cargoAsp, String entrevistador, String observaciones, String modo, int entTipo, int[] horaInicio, int[] horaFin, Date entFecha, float entSalOfer, float entSalPret, char resultado) {
         this.idCandidato = idCandidato;
         this.idProy = idProy;
         this.cargoAsp = cargoAsp;
@@ -41,6 +50,7 @@ public class MEntrevistaOnline {
         this.fecha = entFecha;
         this.salOfer = entSalOfer;
         this.salPret = entSalPret;
+        this.resultado = resultado;
     }
 
     public MEntrevistaOnline() {

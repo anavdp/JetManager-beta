@@ -36,5 +36,7 @@ public interface MEntrevista {
     public void setDuracion(int[] horaI, int[] horaF);
     public String getModo();
     public void setModo(String modo);
+    public char getResultado();
+    public void setResultado(char resultado);
     
 }
